@@ -87,6 +87,7 @@ fetch a remote url as File
 ```javascript
 const thumbBase64 = await createThumb(url,100,100)
 //args   (file, width, height, { timeout = 2048, currentTime = 1, type = "image/png", quality = .8 } = {})
+//file type:File,Image,HTMLVideoElement
 ```
 create File | Image | Video 's  thumb base64，
 
