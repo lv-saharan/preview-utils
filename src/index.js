@@ -278,7 +278,7 @@ export const createThumb = async (
  * @returns
  */
 export const creatPreviewUrl = (file, timeout = 2048) => {
-  if (!(file instanceof File)) return null;
+  if (!(file instanceof File || file instanceof Blob)) return null;
   const url = URL.createObjectURL(file);
   setTimeout(() => {
     URL.revokeObjectURL(url);

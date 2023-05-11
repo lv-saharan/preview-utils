@@ -20,6 +20,7 @@
         <button id="thumb">Create Thumb</button>
         <hr>
         <img alt="thumb img" id="thumbImage">
+        <img alt="thumb img" id="thumbImageBlob">
 
     </div>
     <script type="module">
@@ -51,6 +52,14 @@
                 Number.parseInt(document.querySelector("#imgHeight").value),
             )
             document.querySelector("#thumbImage").src = base64
+
+            const blob = await createThumb(
+                isVideo ? $previewVideo : $preview,
+                Number.parseInt(document.querySelector("#imgWidth").value),
+                Number.parseInt(document.querySelector("#imgHeight").value),
+                { toBlob: true }
+            )
+            document.querySelector("#thumbImageBlob").src = creatPreviewUrl(blob)
         })
     </script>
 </body>
