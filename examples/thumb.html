@@ -24,25 +24,29 @@
     </div>
     <script type="module">
         import { creatPreviewUrl, createThumb } from "../src/index.js"
+        let isVideo = false
+        let $preview = document.querySelector("#preview")
+        let $previewVideo = document.querySelector("#video")
         document.querySelector("#selector").addEventListener("change", async (e) => {
             const file = e.target.files[0]
-            let $preview = document.querySelector("#preview")
-            let $previewVideo = document.querySelector("#video")
+
             if (file.type.startsWith("image/")) {
                 $preview.src = creatPreviewUrl(file)
                 $preview.style.display = "block"
                 $previewVideo.style.display = "none"
+                isVideo = false
             } else if (file.type.startsWith("video/")) {
-                $previewVideo.src = creatPreviewUrl(file)
+                $previewVideo.src = creatPreviewUrl(file, 60 * 1000 * 20)
                 $previewVideo.style.display = "block"
                 $preview.style.display = "none"
+                isVideo = true
             }
 
         })
 
         document.querySelector("#thumb").addEventListener("click", async (e) => {
             const base64 = await createThumb(
-                document.querySelector("#selector").files[0],
+                isVideo ? $previewVideo : $preview,
                 Number.parseInt(document.querySelector("#imgWidth").value),
                 Number.parseInt(document.querySelector("#imgHeight").value),
             )
